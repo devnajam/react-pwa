@@ -1,10 +1,21 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './components/custom/theme-provider';
+import RootLayout from './components/layouts/root-layout';
+import Home from './pages/home';
+import NotFound from './pages/not-found';
+
 function App() {
   return (
-    <div className="w-scree flex h-screen items-center justify-center">
-      <button className="mx-4 w-full rounded-lg bg-blue-600 p-4 text-2xl text-white hover:bg-blue-700 active:bg-blue-800 md:w-fit">
-        Welcome to React PWA
-      </button>
-    </div>
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+      <Router>
+        <Routes>
+          <Route element={<RootLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 
